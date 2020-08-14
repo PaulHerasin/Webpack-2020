@@ -1,5 +1,6 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -11,6 +12,5 @@ module.exports = {
     filename: "[name].[contenthash].bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
-  plugins: [new HTMLWebpackPlugin()],
+  plugins: [new HTMLWebpackPlugin(), new CleanWebpackPlugin()],
 };
- 
