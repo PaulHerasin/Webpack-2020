@@ -16,6 +16,7 @@
   "author": "Pavel <geraci98.98@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "html-webpack-plugin": "^4.3.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
