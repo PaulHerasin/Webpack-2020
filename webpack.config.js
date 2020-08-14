@@ -12,5 +12,10 @@ module.exports = {
     filename: "[name].[contenthash].bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
-  plugins: [new HTMLWebpackPlugin(), new CleanWebpackPlugin()],
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: "./src/index.html",
+    }),
+    new CleanWebpackPlugin(),
+  ],
 };
