@@ -1,5 +1,5 @@
 import Post from "./Post";
-import "./style.css";
+import "./styles/style.css";
 import json from "./assets/json.json";
 import WebpackLogo from "./assets/webpack-logo.png";
 const post = new Post("Webpac Post Title", WebpackLogo);
