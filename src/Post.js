@@ -6,10 +6,14 @@ export default class Post {
   }
 
   toString() {
-    return JSON.stringify({
-      title: this.title,
-      img: this.img,
-      date: this.date.toJSON(),
-    });
+    return JSON.stringify(
+      {
+        title: this.title,
+        img: this.img,
+        date: this.date.toJSON(),
+      },
+      null, // replacer
+      2 // количество пробелов которые хотим сохранить
+    );
   }
 }

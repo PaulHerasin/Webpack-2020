@@ -7,7 +7,7 @@ import "@styles/style.css";
 import WebpackLogo from "./assets/webpack-logo";
 const post = new Post("Webpac Post Title", WebpackLogo);
 
-$("p").html(post.toString());
+$("pre").html(post.toString());
 
 // console.log("JSON", json);
 // console.log("XML", xml);

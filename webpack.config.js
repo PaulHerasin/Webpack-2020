@@ -14,6 +14,11 @@ module.exports = {
       "@styles": path.resolve(__dirname, "src/assets/styles"),
     },
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
   output: {
     filename: "[name].[contenthash].bundle.js",
     path: path.resolve(__dirname, "dist"),
