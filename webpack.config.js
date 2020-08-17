@@ -8,6 +8,12 @@ module.exports = {
     main: "./src/index.js",
     analytics: "./src/analytics.js",
   },
+  resolve: {
+    extensions: [".js", ".json", ".png"],
+    alias: {
+      "@styles": path.resolve(__dirname, "src/assets/styles"),
+    },
+  },
   output: {
     filename: "[name].[contenthash].bundle.js",
     path: path.resolve(__dirname, "dist"),
