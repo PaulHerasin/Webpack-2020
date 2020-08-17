@@ -23,6 +23,8 @@ const optimization = () => {
   return config;
 };
 
+const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
+
 module.exports = {
   mode: "production",
   entry: {
@@ -37,7 +39,7 @@ module.exports = {
   },
   optimization: optimization(),
   output: {
-    filename: "[name].[contenthash].bundle.js",
+    filename: filename("js"),
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [
@@ -57,7 +59,7 @@ module.exports = {
       ],
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].bundle.css",
+      filename: filename("css"),
     }),
   ],
   devServer: {
