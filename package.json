@@ -4,9 +4,9 @@
   "description": "webpack course",
   "private": true,
   "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "dev": "cross-env Node_ENV=development webpack --mode development",
+    "build": "cross-env Node_ENV=production webpack --mode production",
+    "start": "cross-env Node_ENV=development webpack-dev-server --mode development --open"
   },
   "keywords": [
     "js",
@@ -17,10 +17,14 @@
   "license": "ISC",
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "cross-env": "^7.0.2",
     "css-loader": "^4.2.1",
     "csv-loader": "^3.0.3",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.10.0",
+    "papaparse": "^5.2.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
