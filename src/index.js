@@ -1,6 +1,7 @@
 import * as $ from "jquery";
 import Post from "./Post";
 import "@styles/style.css";
+import "@styles/scss.scss";
 // import json from "./assets/json.json";
 // import xml from "./assets/data.xml";
 // import csv from "./assets/data.csv";
