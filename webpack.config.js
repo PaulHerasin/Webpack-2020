@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
+const loader = require("sass-loader");
 const isDev = process.env.NODE_ENV === "development";
 const isProd = !isDev;
 
@@ -24,6 +25,23 @@ const optimization = () => {
 };
 
 const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
+
+const cssLoaders = (ext) => {
+  const loaders = [
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        hrm: isDev,
+        reloadAll: true,
+      },
+    },
+    "css-loader",
+  ];
+  if (ext) {
+    loaders.push(ext);
+  }
+  return loaders;
+};
 
 module.exports = {
   mode: "production",
@@ -70,30 +88,11 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hrm: isDev,
-              reloadAll: true,
-            },
-          },
-          "css-loader",
-        ],
+        use: cssLoaders(),
       },
       {
         test: /\.scss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hrm: isDev,
-              reloadAll: true,
-            },
-          },
-          "css-loader",
-          "sass-loader",
-        ],
+        use: cssLoaders("sass-loader"),
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
