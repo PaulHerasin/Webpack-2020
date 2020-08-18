@@ -93,6 +93,7 @@ module.exports = {
       filename: filename("css"),
     }),
   ],
+  devtools: isDev ? "source-map" : "",
   devServer: {
     port: 4200,
     hot: isDev,
