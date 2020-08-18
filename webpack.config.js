@@ -46,7 +46,7 @@ const cssLoaders = (ext) => {
 module.exports = {
   mode: "production",
   entry: {
-    main: "./src/index.js",
+    main: ["@babel/polyfill", "./src/index.js"],
     analytics: "./src/analytics.js",
   },
   resolve: {
@@ -109,6 +109,17 @@ module.exports = {
       {
         test: /\.csv$/,
         use: ["csv-loader"],
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-proposal-class-properties"],
+          },
+        },
       },
     ],
   },
