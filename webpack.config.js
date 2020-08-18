@@ -56,6 +56,19 @@ const babelOptions = (preset) => {
   return opts;
 };
 
+const isLoaders = () => {
+  const loaders = [
+    {
+      loader: "babel-loader",
+      options: babelOptions(),
+    },
+  ];
+  if (isDev) {
+    loaders.push("eslint-loader");
+  }
+  return loaders;
+};
+
 module.exports = {
   mode: "production",
   entry: {
@@ -93,7 +106,7 @@ module.exports = {
       filename: filename("css"),
     }),
   ],
-  devtools: isDev ? "source-map" : "",
+  devtool: isDev ? "source-map" : "",
   devServer: {
     port: 4200,
     hot: isDev,
@@ -127,10 +140,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: {
-          loader: "babel-loader",
-          options: babelOptions(),
-        },
+        use: isLoaders(),
       },
       {
         test: /\.ts$/,
