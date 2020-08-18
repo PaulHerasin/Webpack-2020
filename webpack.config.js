@@ -8,6 +8,7 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const loader = require("sass-loader");
 const isDev = process.env.NODE_ENV === "development";
 const isProd = !isDev;
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 const optimization = () => {
   const config = {
@@ -69,24 +70,8 @@ const isLoaders = () => {
   return loaders;
 };
 
-module.exports = {
-  mode: "production",
-  entry: {
-    main: ["@babel/polyfill", "./src/index.jsx"],
-    analytics: "./src/analytics.ts",
-  },
-  resolve: {
-    extensions: [".js", ".json", ".png"],
-    alias: {
-      "@styles": path.resolve(__dirname, "src/assets/styles"),
-    },
-  },
-  optimization: optimization(),
-  output: {
-    filename: filename("js"),
-    path: path.resolve(__dirname, "dist"),
-  },
-  plugins: [
+const plugins = () => {
+  const base = [
     new HTMLWebpackPlugin({
       template: "./src/index.html",
       minify: {
@@ -105,7 +90,33 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: filename("css"),
     }),
-  ],
+  ];
+
+  if (isProd) {
+    base.push(new BundleAnalyzerPlugin());
+  }
+  return base;
+};
+
+module.exports = {
+  mode: "production",
+  entry: {
+    main: ["@babel/polyfill", "./src/index.jsx"],
+    analytics: "./src/analytics.ts",
+  },
+  resolve: {
+    extensions: [".js", ".json", ".png"],
+    alias: {
+      "@styles": path.resolve(__dirname, "src/assets/styles"),
+    },
+  },
+  optimization: optimization(),
+  output: {
+    filename: filename("js"),
+    path: path.resolve(__dirname, "dist"),
+  },
+  plugins: plugins(),
+
   devtool: isDev ? "source-map" : "",
   devServer: {
     port: 4200,
